@@ -1,0 +1,1 @@
+# mwe-django-500
