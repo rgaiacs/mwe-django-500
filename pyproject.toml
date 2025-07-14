@@ -17,3 +17,6 @@ platforms = ["linux-64"]
 mwe_django_500 = { path = ".", editable = true }
 
 [tool.pixi.tasks]
+
+[tool.pixi.dependencies]
+django = ">=5.2.4,<6"
