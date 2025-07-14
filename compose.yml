@@ -1,0 +1,45 @@
+services:
+  curl:
+    image: curlimages/curl:8.14.1
+    command: ["tail", "-f", "/dev/null"]
+
+  nginx:
+    depends_on:
+      - mwe
+    image: nginx:1.25.4-alpine-slim
+    expose:
+      - "80"
+    ports:
+      - "80:80"
+    volumes:
+      - type: bind
+        source: ./compose/nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
+      - type: bind
+        source: ./compose/nginx/sites-enabled
+        target: /etc/nginx/conf.d
+      - type: volume
+        source: static-files
+        target: /var/www/static
+
+  mwe:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: base
+    healthcheck:
+      test: ["CMD", "wget", "-O", "/dev/null", "http://127.0.0.1:8000"]
+    expose:
+      - "8000"
+    environment:
+      DJANGO_STATIC_ROOT: /var/www/
+    volumes:
+      - type: bind
+        source: mwe
+        target: /var/app
+      - type: volume
+        source: static-files
+        target: /var/www/static
+
+volumes:
+  static-files:
