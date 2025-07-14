@@ -268,7 +268,7 @@ packages:
 - pypi: .
   name: mwe-django-500
   version: 0.1.0
-  sha256: 0b41a7e55e55ad3331983d07a4f987e8b14d5715b4a39d20ecd6e3d486d0e287
+  sha256: 168c95d2b1b0c5ddedd0b3dd29d1824b400d868651855c46ab8ec483447fb71b
   requires_python: '>=3.11'
   editable: true
 - conda: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.5-h2d0b736_3.conda
